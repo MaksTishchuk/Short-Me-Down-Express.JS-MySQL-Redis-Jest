@@ -2,23 +2,23 @@
   TypeScript Express
 </h1>
 
-<h4 align="center">🚀 Short Me Down</h4>
+<h2 align="center">🚀 Short Me Down</h4>
 
-## 🚀 Quick Start
+### 🚀 Quick Start
 
-### Run Docker. Open this project and run command in terminal:
+#### Run Docker. Open this project and run command in terminal:
 
 ```bash
 $ docker-compose up
 ```
 
-### Run tests:
+#### Run tests:
 
 ```bash
 $ npm run test
 ```
 
-## 💎 The Package Features
+### 💎 The Package Features
 
 <p>
   <img src="https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=TypeScript&logoColor=fff" />&nbsp;&nbsp;
