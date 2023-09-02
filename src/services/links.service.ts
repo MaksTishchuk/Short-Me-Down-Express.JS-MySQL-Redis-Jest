@@ -29,15 +29,20 @@ export class LinksService {
         fullUrl: dto.fullUrl, shortUrl, token,
       })
       await this.redisClient.setex(createdLink.fullUrl, 1800, JSON.stringify(createdLink))
+      await this.redisClient.setex(createdLink.token, 4*3600, createdLink.fullUrl)
       return createdLink
     }
     await this.redisClient.setex(existsLink.fullUrl, 1800, JSON.stringify(existsLink))
+    await this.redisClient.setex(existsLink.token, 4*3600, existsLink.fullUrl)
     return existsLink
   }
 
   public async redirectToUrl(token: string): Promise<string> {
+    const getFullUrl = await this.redisClient.get(token)
+    if (getFullUrl) return getFullUrl
     const existsLink: ILink | null = await DB.Links.findOne({ where: { token } })
     if (!existsLink) throw new HttpException(404, 'Link was not found!')
+    await this.redisClient.setex(existsLink.token, 4*3600, existsLink.fullUrl)
     return existsLink.fullUrl
   }
 
