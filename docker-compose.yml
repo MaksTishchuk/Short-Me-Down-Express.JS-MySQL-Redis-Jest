@@ -15,7 +15,7 @@ services:
       - db-mysql
       - redis-server
     volumes:
-      - .:/usr/src/app # any change to base folder should be reflected
+      - .:/usr/src/app
       - /usr/src/app/node_modules
     networks:
       - backend
