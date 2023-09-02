@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  server:
+    container_name: server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - db-mysql
+      - redis-server
+    volumes:
+      - .:/usr/src/app # any change to base folder should be reflected
+      - /usr/src/app/node_modules
+    networks:
+      - backend
+
+  db-mysql:
+    image: mysql
+    restart: unless-stopped
+    container_name: db-mysql
+    environment:
+      - MYSQL_DATABASE=$DB_NAME
+      - MYSQL_USER=$DB_USER
+      - MYSQL_PASSWORD=$DB_PASSWORD
+      - MYSQL_ROOT_PASSWORD=$DB_ROOT_PASSWORD
+    expose:
+      - "3306"
+    volumes:
+      - db-mysql:/data_db/db/mysql
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    container_name: adminer-db-mysql
+    restart: unless-stopped
+    ports:
+      - 8888:8080
+    networks:
+      - backend
+
+  redis-server:
+    image: redis
+    container_name: redis-server
+    restart: unless-stopped
+    expose:
+      - "6379"
+    env_file: .env
+    command: redis-server --save 20 1 --loglevel warning --requirepass $REDIS_PASSWORD
+    volumes:
+      - redis:/data_redis/redis
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  db-mysql:
+  redis:
