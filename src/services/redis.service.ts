@@ -1,4 +1,4 @@
-const Redis = require('ioredis')
+import {Redis} from 'ioredis'
 import { redisConfig } from '../config/redis/redisConfig'
 import {logger} from '../config/logger/loggerConfig'
 

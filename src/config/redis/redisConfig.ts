@@ -1,7 +1,6 @@
 import { RedisOptions } from 'ioredis'
+import dotenv from 'dotenv'
 import config from '../config'
-
-const dotenv = require('dotenv')
 
 dotenv.config()
 

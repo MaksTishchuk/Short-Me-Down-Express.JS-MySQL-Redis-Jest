@@ -1,4 +1,4 @@
-const dotenv = require('dotenv')
+import dotenv from 'dotenv'
 import {logger} from './logger/loggerConfig'
 
 dotenv.config()

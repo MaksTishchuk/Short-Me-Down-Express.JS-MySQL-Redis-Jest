@@ -4,13 +4,13 @@ import compression from 'compression'
 import bodyParser from 'body-parser'
 import hpp from 'hpp'
 import morgan from 'morgan'
+import cors from 'cors'
+// @ts-ignore
+import helmet from 'helmet'
 import { DB } from './config/db/dbConfig'
 import { IRoutes } from './interfaces/routes.interface'
 import { ErrorMiddleware } from './middlewares/error.middleware'
 import {logger} from './config/logger/loggerConfig'
-
-const cors = require('cors')
-const helmet = require('helmet')
 
 export class App {
   public app: express.Application
